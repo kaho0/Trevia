@@ -79,7 +79,7 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
             href="/onboarding"
             className="flex flex-col items-center"
           >
-            <div className="bg-blue-500 rounded-full p-3">
+            <div className="bg-blue-500 rounded-full p-2">
               <Plus className="h-6 w-6 text-white" />
             </div>
           </Link>

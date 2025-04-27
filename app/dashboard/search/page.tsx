@@ -97,10 +97,6 @@ export default function SearchPage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <Button size="sm" className="absolute right-2 top-2">
-          <Filter className="h-4 w-4 mr-1" />
-          Filters
-        </Button>
       </div>
 
       {/* Quick Filters */}
