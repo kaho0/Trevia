@@ -1,0 +1,3 @@
+export const supabaseUrl = "https://wpdbdxnhohvcsbptatzt.supabase.co"
+export const supabaseAnonKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndwZGJkeG5ob2h2Y3NicHRhdHp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU1MTc4NTQsImV4cCI6MjA2MTA5Mzg1NH0.5WEYhOFGLcBxYiPQpAtF7wpfIJQoMh7HFVPxPRylr2I"
