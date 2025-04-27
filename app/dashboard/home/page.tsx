@@ -1,9 +1,8 @@
 "use client"
-
+import { Star, Calendar, Loader2, Bell, UsersIcon, Clock, ClipboardListIcon } from "lucide-react"
 import { useProfile } from "@/hooks/use-profile"
 import { ThemeToggle } from "@/components/theme-toggle"
 import Image from "next/image"
-import { Star, Calendar, Loader2, Bell } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { useTheme } from "next-themes"
@@ -57,33 +56,69 @@ export default function HomePage() {
 
       {/* Trip Card */}
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Your Upcoming Trip</h2>
-        <div className="relative w-full h-48 md:h-64 rounded-xl overflow-hidden">
-          <Image
-            src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80"
-            alt="Tokyo"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70"></div>
-          <div className="absolute bottom-0 left-0 p-6 w-full">
-            <h2 className="text-4xl font-bold text-white">TOKYO</h2>
-            <p className="text-sm text-white/80 mt-1">27 APRIL - 2 MAY 2025</p>
-          </div>
-          <div className="absolute bottom-6 right-6 flex space-x-3">
-            <div className="bg-black/50 rounded-full px-3 py-1.5 flex items-center text-sm text-white">
-              <Star className="h-4 w-4 text-yellow-400 mr-2" />
-              <span>5 Days</span>
+      <h2 className="text-xl font-semibold mb-4">Your Upcoming Trip</h2>
+      <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?ixlib=rb-4.0.3"
+          alt="Tokyo Skyline with Tokyo Tower"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-purple-500/20 to-black/50"></div>
+        
+        {/* Top-left city and date */}
+        <div className="absolute top-6 left-6 z-10 flex flex-col items-start">
+          <h2 className="text-5xl font-extrabold text-white tracking-wide leading-none drop-shadow-md">TOKYO</h2>
+          <p className="text-base text-white/90 mt-2 font-medium drop-shadow">27.01.2025 - 02.02.2025</p>
+        </div>
+        
+        {/* Top-right arrow icon */}
+        <div className="absolute top-6 right-6 z-10">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M7 17L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </div>
+        
+        {/* Bottom stats row */}
+        <div className="absolute bottom-6 left-0 w-full flex justify-evenly items-center px-6 z-10 gap-4">
+          {/* Duration */}
+          <div className="flex items-center">
+            <div className="flex items-center">
+              <Clock className="w-6 h-6 mr-2 text-[#C1FF72] bg-black/40 rounded-full" />
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-white">8 Days</span>
+                <span className="text-xs text-white">Duration</span>
+              </div>
             </div>
-            <div className="bg-black/50 rounded-full px-3 py-1.5 flex items-center text-sm text-white">
-              <Calendar className="h-4 w-4 text-yellow-400 mr-2" />
-              <span>5 Nights</span>
+          </div>
+          
+          {/* Group Size */}
+          <div className="flex items-center">
+            <div className="flex items-center  rounded-full px-3 py-2">
+              <UsersIcon className="w-6 h-6 mr-2 text-[#C1FF72] bg-black/40 rounded-full" />
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-white">4 (2M,2F)</span>
+                <span className="text-xs text-white">Group Size</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Activities */}
+          <div className="flex items-center">
+            <div className="flex items-center rounded-full px-3 py-2">
+              <ClipboardListIcon className="w-6 h-6 mr-2 text-[#C1FF72] bg-black/40 rounded-full" />
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-white">14</span>
+                <span className="text-xs text-white">Activities</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
       {/* Flight Details */}
       <div className="bg-blue-600 rounded-xl p-4 relative overflow-hidden min-h-[100px]">
@@ -136,15 +171,15 @@ export default function HomePage() {
               />
             </div>
             <div className="p-4">
-              <h4 className="font-semibold text-base">Shinagawa Prince Hotel</h4>
-              <div className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"} mt-2`}>
+              <h4 className="font-semibold text-base">Shinagawa Hotel</h4>
+              <div className={`text-xs ${isDark ? "text-gray-400" : "text-gray-500"} mt-2`}>
                 Check in: 28.01.2025, 11:15 am
               </div>
-              <div className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"} mt-1`}>
+              <div className={`text-xs ${isDark ? "text-gray-400" : "text-gray-500"} mt-1`}>
                 Check out: 30.01.2025, 11:0 am
               </div>
               <div className="flex justify-between items-center mt-3">
-                <div className="text-sm font-medium">2 Nights</div>
+                <div className="text-xs font-medium">2 Nights</div>
                 <div
                   className={`${isDark ? "bg-green-900/30 text-green-400" : "bg-green-100 text-green-600"} text-xs px-3 py-1 rounded-full font-medium`}
                 >
@@ -168,14 +203,14 @@ export default function HomePage() {
             </div>
             <div className="p-4">
               <h4 className="font-semibold text-base">Mercure Tokyo Hotel</h4>
-              <div className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"} mt-2`}>
+              <div className={`text-xs ${isDark ? "text-gray-400" : "text-gray-500"} mt-2`}>
                 Check in: 30.01.2025, 6:00 pm
               </div>
-              <div className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"} mt-1`}>
+              <div className={`text-xs ${isDark ? "text-gray-400" : "text-gray-500"} mt-1`}>
                 Check out: 01.02.2025, 11:0 am
               </div>
               <div className="flex justify-between items-center mt-3">
-                <div className="text-sm font-medium">2 Nights</div>
+                <div className="text-xs font-medium">2 Nights</div>
                 <div
                   className={`${isDark ? "bg-red-900/30 text-red-400" : "bg-red-100 text-red-600"} text-xs px-3 py-1 rounded-full font-medium`}
                 >
@@ -197,7 +232,7 @@ export default function HomePage() {
         {/* Day Plan and Activities buttons - Updated to match design */}
         <div className="flex gap-3 mb-6">
           <button
-            className={`${isDark ? "bg-[#C1FF72] text-black" : "bg-blue-600 text-white"} font-bold text-sm px-6 py-2.5 rounded-full`}
+            className={`${isDark ? "bg-[#C1FF72] text-black" : "bg-blue-600 text-white"} font-semibold text-sm px-6 py-2.5 rounded-full`}
           >
             Day Plan
           </button>
@@ -306,10 +341,10 @@ export default function HomePage() {
               />
             </div>
             <div className="flex-1 p-4 flex flex-col justify-center">
-              <h4 className="font-semibold text-base">Shopping Street Senso-ji</h4>
-              <div className="text-sm mt-3"><span className="font-semibold">Timing:</span> 9:15 am Morning</div>
-              <div className="text-sm mt-1"><span className="font-semibold">Duration:</span> 3 hours</div>
-              <div className="text-sm mt-1"><span className="font-semibold">Pick up:</span> From Hotel</div>
+              <h4 className="font-semibold text-base sm:text-base text-xs">Shopping Street Senso-ji</h4>
+              <div className="text-sm sm:text-sm text-xs mt-3"><span className="font-semibold">Timing:</span> 9:15 am Morning</div>
+              <div className="text-sm sm:text-sm text-xs mt-1"><span className="font-semibold">Duration:</span> 3 hours</div>
+              <div className="text-sm sm:text-sm text-xs mt-1"><span className="font-semibold">Pick up:</span> From Hotel</div>
             </div>
           </div>
 
@@ -326,10 +361,10 @@ export default function HomePage() {
               />
             </div>
             <div className="flex-1 p-4 flex flex-col justify-center">
-              <h4 className="font-semibold text-base">Tokyo Sky Tree</h4>
-              <div className="text-sm mt-3"><span className="font-semibold">Timing:</span> 1:00 pm Afternoon</div>
-              <div className="text-sm mt-1"><span className="font-semibold">Duration:</span> 3 hours</div>
-              <div className="text-sm mt-1"><span className="font-semibold">Pick up:</span> From Nakamise Street</div>
+              <h4 className="font-semibold text-base sm:text-base text-xs">Tokyo Sky Tree</h4>
+              <div className="text-sm sm:text-sm text-xs mt-3"><span className="font-semibold">Timing:</span> 1:00 pm Afternoon</div>
+              <div className="text-sm sm:text-sm text-xs mt-1"><span className="font-semibold">Duration:</span> 3 hours</div>
+              <div className="text-sm sm:text-sm text-xs mt-1"><span className="font-semibold">Pick up:</span> From Nakamise Street</div>
             </div>
           </div>
 
@@ -346,10 +381,10 @@ export default function HomePage() {
               />
             </div>
             <div className="flex-1 p-4 flex flex-col justify-center">
-              <h4 className="font-semibold text-base">Kimono Wearing</h4>
-              <div className="text-sm mt-3"><span className="font-semibold">Timing:</span> Anytime before 8:00pm</div>
-              <div className="text-sm mt-1"><span className="font-semibold">Duration:</span> 1-2 hours</div>
-              <div className="text-sm mt-1"><span className="font-semibold">Pick up:</span> From Hotel</div>
+              <h4 className="font-semibold text-base sm:text-base text-xs">Kimono Wearing</h4>
+              <div className="text-sm sm:text-sm text-xs mt-3"><span className="font-semibold">Timing:</span> Anytime before 8:00pm</div>
+              <div className="text-sm sm:text-sm text-xs mt-1"><span className="font-semibold">Duration:</span> 1-2 hours</div>
+              <div className="text-sm sm:text-sm text-xs mt-1"><span className="font-semibold">Pick up:</span> From Hotel</div>
             </div>
           </div>
         </div>

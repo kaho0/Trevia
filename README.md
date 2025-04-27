@@ -63,3 +63,12 @@ Trevia is a modern travel planner app built with Next.js, Tailwind CSS, and Supa
 - Update branding in `/components/login-screen.tsx` and other UI components as needed.
 - Modify theme colors in `tailwind.config.ts`.
 
+<<<<<<< HEAD
+=======
+## License
+MIT
+
+---
+
+**Made with ❤️ by kaho0 and contributors.**
+>>>>>>> 0407b70 (Add travel planner UI design)

@@ -1,19 +1,23 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { MapPin, Clock, Users } from "lucide-react"
+import { MapPin, Clock, Users, User, User2, UserCheck } from "lucide-react"
 import { useTheme } from "next-themes"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function OnboardingPage() {
   const [destination, setDestination] = useState("")
   const [duration, setDuration] = useState("")
   const [companions, setCompanions] = useState<string[]>([])
+  const [mounted, setMounted] = useState(false)
   const router = useRouter()
   const { theme } = useTheme()
+
+  useEffect(() => setMounted(true), [])
 
   const handleCompanionToggle = (companion: string) => {
     if (companions.includes(companion)) {
@@ -30,8 +34,11 @@ export default function OnboardingPage() {
   const isDark = theme === "dark"
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black p-6 flex flex-col">
-      <div className="flex-1">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-gray-950">
+      <div className="w-full max-w-md bg-white/90 dark:bg-gray-900/90 rounded-2xl shadow-xl p-8 flex flex-col">
+        <div className="flex justify-end mb-2">
+          <ThemeToggle />
+        </div>
         <div className="mb-8">
           <h1 className="text-2xl font-bold mb-1">Plan Your Journey, Your Way!</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400">Let's create your personalised travel experience</p>
@@ -73,10 +80,10 @@ export default function OnboardingPage() {
             <label className="block mb-3 font-medium">Who are you traveling with?</label>
             <div className="grid grid-cols-2 gap-3">
               {[
-                { label: "Solo", icon: <Users className="mr-2 h-4 w-4" /> },
-                { label: "Couple", icon: <Users className="mr-2 h-4 w-4" /> },
+                { label: "Solo", icon: <User className="mr-2 h-4 w-4" /> },
+                { label: "Couple", icon: <User2 className="mr-2 h-4 w-4" /> },
                 { label: "Family", icon: <Users className="mr-2 h-4 w-4" /> },
-                { label: "Friends", icon: <Users className="mr-2 h-4 w-4" /> },
+                { label: "Friends", icon: <UserCheck className="mr-2 h-4 w-4" /> },
               ].map((option) => (
                 <button
                   key={option.label}
@@ -84,27 +91,29 @@ export default function OnboardingPage() {
                   className={`py-3 px-4 rounded-lg flex items-center justify-center ${
                     companions.includes(option.label)
                       ? "bg-blue-600 text-white"
-                      : isDark
-                        ? "bg-gray-800 text-white"
-                        : "bg-gray-100 text-gray-700"
+                      : !mounted
+                        ? "bg-gray-100 text-gray-700"
+                        : isDark
+                          ? "bg-gray-800 text-white"
+                          : "bg-gray-100 text-gray-700"
                   }`}
+
                 >
                   {option.icon}
                   <span>{option.label}</span>
                 </button>
               ))}
             </div>
+            <Button
+              className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white mt-6"
+              onClick={handleContinue}
+              disabled={!destination || !duration || companions.length === 0}
+            >
+              Continue
+            </Button>
           </div>
         </div>
       </div>
-
-      <Button
-        className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white mt-6"
-        onClick={handleContinue}
-        disabled={!destination || !duration || companions.length === 0}
-      >
-        Continue
-      </Button>
     </div>
   )
 }

@@ -3,29 +3,9 @@ import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import SupabaseProvider from "@/components/supabase-provider"
-import localFont from "next/font/local"
+import { Poppins } from "next/font/google"
 
-// Load Mont font locally
-const montFont = localFont({
-  src: [
-    {
-      path: "../public/fonts/Mont-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Mont-SemiBold.woff2",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Mont-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-mont",
-})
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
 
 export default function RootLayout({
   children,
@@ -34,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${montFont.variable} font-sans`}>
+      <body className={poppins.className}>
         <SupabaseProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             {children}
