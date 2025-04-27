@@ -1,7 +1,7 @@
 import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "react-hot-toast"
 import SupabaseProvider from "@/components/supabase-provider"
 import { Poppins } from "next/font/google"
 
@@ -18,7 +18,7 @@ export default function RootLayout({
         <SupabaseProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             {children}
-            <Toaster />
+            <Toaster position="top-center" />
           </ThemeProvider>
         </SupabaseProvider>
       </body>

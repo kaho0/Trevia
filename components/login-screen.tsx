@@ -10,10 +10,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useToast } from "@/components/ui/use-toast"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react"
 import Image from "next/image"
+import { toast } from "react-hot-toast"
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("")
@@ -22,7 +22,6 @@ export default function LoginScreen() {
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState<"login" | "register">("login")
   const router = useRouter()
-  const { toast } = useToast()
   const { supabase } = useSupabase()
   const { isLoggedIn, loading: profileLoading } = useProfile()
 
@@ -47,18 +46,10 @@ export default function LoginScreen() {
         throw error
       }
 
-      toast({
-        title: "Login successful",
-        description: "Welcome back to Trevia!",
-      })
-
+      toast.success("Login successful")
       router.push("/onboarding")
     } catch (error: any) {
-      toast({
-        title: "Login failed",
-        description: error.message || "Please check your credentials and try again",
-        variant: "destructive",
-      })
+      toast.error(error.message || "Please check your credentials and try again")
     } finally {
       setLoading(false)
     }
@@ -81,19 +72,11 @@ export default function LoginScreen() {
         throw error
       }
 
-      toast({
-        title: "Registration successful",
-        description: "Please check your email to confirm your account",
-      })
-
+      toast.success("Registration successful, please check your email to verify your account")
       // For demo purposes, redirect to onboarding after registration
       router.push("/onboarding")
     } catch (error: any) {
-      toast({
-        title: "Registration failed",
-        description: error.message || "Please try again with a different email",
-        variant: "destructive",
-      })
+      toast.error(error.message || "Please try again with a different email")
     } finally {
       setLoading(false)
     }
